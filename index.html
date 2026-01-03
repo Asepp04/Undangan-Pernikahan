@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;400;500&display=swap');
+    
+    .fade-in {
+      animation: fadeIn 1.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .heart-beat {
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+    
+    .flower-rotate {
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .slide-up {
+      animation: slideUp 1s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto">
+  <div id="app-wrapper" class="w-full h-full" style="background: linear-gradient(135deg, #fdf4f5 0%, #e8d5d8 100%);"><!-- Hero Section -->
+   <div class="min-h-screen flex flex-col items-center justify-center px-6 py-12 relative overflow-hidden"><!-- Decorative Flowers -->
+    <div class="absolute top-10 left-10 w-20 h-20 opacity-20 flower-rotate">
+     <svg viewbox="0 0 100 100" fill="currentColor" class="text-pink-400"><path d="M50,50 Q40,30 50,20 Q60,30 50,50 Q70,40 80,50 Q70,60 50,50 Q60,70 50,80 Q40,70 50,50 Q30,60 20,50 Q30,40 50,50" />
+     </svg>
+    </div>
+    <div class="absolute bottom-10 right-10 w-24 h-24 opacity-20 flower-rotate" style="animation-direction: reverse;">
+     <svg viewbox="0 0 100 100" fill="currentColor" class="text-pink-400"><path d="M50,50 Q40,30 50,20 Q60,30 50,50 Q70,40 80,50 Q70,60 50,50 Q60,70 50,80 Q40,70 50,50 Q30,60 20,50 Q30,40 50,50" />
+     </svg>
+    </div>
+    <div class="text-center fade-in relative z-10">
+     <div class="text-6xl mb-6 heart-beat">
+      💕
+     </div>
+     <p class="text-pink-600 text-lg mb-4" id="opening-text" style="font-family: 'Quicksand', sans-serif;">The Wedding of</p>
+     <h1 class="text-5xl md:text-6xl font-bold mb-2" id="bride-name-display" style="font-family: 'Playfair Display', serif; color: #d946a6;">Sarah Putri</h1>
+     <div class="text-3xl my-4 text-pink-500">
+      &amp;
+     </div>
+     <h1 class="text-5xl md:text-6xl font-bold mb-8" id="groom-name-display" style="font-family: 'Playfair Display', serif; color: #d946a6;">Ahmad Rizki</h1><!-- Music Control -->
+     <div class="mt-8 flex items-center justify-center gap-3"><button id="music-toggle" class="px-6 py-3 rounded-full text-white transition-all duration-300 shadow-lg hover:shadow-xl" style="background: linear-gradient(135deg, #ec4899 0%, #d946a6 100%);"> <span id="music-icon">🔊</span> <span id="music-text">Putar Musik</span> </button>
+     </div>
+    </div>
+   </div><!-- Parents Section -->
+   <div class="py-16 px-6 slide-up">
+    <div class="max-w-3xl mx-auto">
+     <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-2" style="font-family: 'Playfair Display', serif; color: #d946a6;">Orang Tua Kami</h2>
+      <div class="w-24 h-1 mx-auto rounded" style="background: linear-gradient(90deg, #ec4899 0%, #d946a6 100%);"></div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-8">
+      <div class="text-center p-6 rounded-2xl shadow-lg" style="background: white;">
+       <div class="text-4xl mb-4">
+        👰
+       </div>
+       <p class="text-gray-600 mb-2" style="font-family: 'Quicksand', sans-serif;">Putri dari</p>
+       <p class="text-xl font-semibold" id="bride-parents-display" style="font-family: 'Quicksand', sans-serif; color: #d946a6;">Bapak Budi &amp; Ibu Siti</p>
+      </div>
+      <div class="text-center p-6 rounded-2xl shadow-lg" style="background: white;">
+       <div class="text-4xl mb-4">
+        🤵
+       </div>
+       <p class="text-gray-600 mb-2" style="font-family: 'Quicksand', sans-serif;">Putra dari</p>
+       <p class="text-xl font-semibold" id="groom-parents-display" style="font-family: 'Quicksand', sans-serif; color: #d946a6;">Bapak Hasan &amp; Ibu Fatimah</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Countdown Section -->
+   <div class="py-16 px-6" style="background: rgba(255, 255, 255, 0.5);">
+    <div class="max-w-3xl mx-auto text-center">
+     <h2 class="text-3xl font-bold mb-8" style="font-family: 'Playfair Display', serif; color: #d946a6;">Hitungan Mundur</h2>
+     <div class="grid grid-cols-4 gap-4 mb-8">
+      <div class="p-6 rounded-xl shadow-lg" style="background: white;">
+       <div class="text-4xl font-bold mb-2" id="days" style="color: #d946a6;">
+        0
+       </div>
+       <div class="text-gray-600" style="font-family: 'Quicksand', sans-serif;">
+        Hari
+       </div>
+      </div>
+      <div class="p-6 rounded-xl shadow-lg" style="background: white;">
+       <div class="text-4xl font-bold mb-2" id="hours" style="color: #d946a6;">
+        0
+       </div>
+       <div class="text-gray-600" style="font-family: 'Quicksand', sans-serif;">
+        Jam
+       </div>
+      </div>
+      <div class="p-6 rounded-xl shadow-lg" style="background: white;">
+       <div class="text-4xl font-bold mb-2" id="minutes" style="color: #d946a6;">
+        0
+       </div>
+       <div class="text-gray-600" style="font-family: 'Quicksand', sans-serif;">
+        Menit
+       </div>
+      </div>
+      <div class="p-6 rounded-xl shadow-lg" style="background: white;">
+       <div class="text-4xl font-bold mb-2" id="seconds" style="color: #d946a6;">
+        0
+       </div>
+       <div class="text-gray-600" style="font-family: 'Quicksand', sans-serif;">
+        Detik
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Event Details -->
+   <div class="py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+     <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-2" style="font-family: 'Playfair Display', serif; color: #d946a6;">Detail Acara</h2>
+      <div class="w-24 h-1 mx-auto rounded" style="background: linear-gradient(90deg, #ec4899 0%, #d946a6 100%);"></div>
+     </div>
+     <div class="p-8 rounded-2xl shadow-xl" style="background: white;">
+      <div class="mb-6">
+       <div class="flex items-center gap-3 mb-2"><span class="text-2xl">📅</span>
+        <p class="text-xl font-semibold" id="event-date-display" style="font-family: 'Quicksand', sans-serif; color: #d946a6;">31 Desember 2024</p>
+       </div>
+      </div>
+      <div class="mb-6">
+       <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🕐</span>
+        <p class="text-xl font-semibold" id="event-time-display" style="font-family: 'Quicksand', sans-serif; color: #d946a6;">10:00 WIB</p>
+       </div>
+      </div>
+      <div class="mb-6">
+       <div class="flex items-center gap-3 mb-2"><span class="text-2xl">🏛️</span>
+        <p class="text-xl font-semibold" id="event-venue-display" style="font-family: 'Quicksand', sans-serif; color: #d946a6;">Gedung Serbaguna Jakarta</p>
+       </div>
+      </div>
+      <div class="mb-8">
+       <div class="flex items-center gap-3 mb-2"><span class="text-2xl">📍</span>
+        <p class="text-lg text-gray-600" id="event-address-display" style="font-family: 'Quicksand', sans-serif;">Jl. Sudirman No. 123, Jakarta</p>
+       </div>
+      </div><a id="maps-button" href="https://maps.google.com/?q=-6.2088,106.8456" target="_blank" rel="noopener noreferrer" class="block w-full py-4 px-6 rounded-full text-white text-center font-semibold transition-all duration-300 shadow-lg hover:shadow-xl" style="background: linear-gradient(135deg, #ec4899 0%, #d946a6 100%); font-family: 'Quicksand', sans-serif;"> 📍 Buka di Google Maps </a>
+     </div>
+    </div>
+   </div><!-- Footer -->
+   <div class="py-12 text-center px-6" style="background: rgba(255, 255, 255, 0.7);">
+    <p class="text-gray-600 mb-2" style="font-family: 'Quicksand', sans-serif;">Merupakan suatu kehormatan dan kebahagiaan bagi kami</p>
+    <p class="text-gray-600 mb-4" style="font-family: 'Quicksand', sans-serif;">apabila Bapak/Ibu/Saudara/i berkenan hadir</p>
+    <div class="text-4xl">
+     💝
+    </div>
+   </div>
+   <audio id="background-music" loop></audio>
+  </div>
+  <script>
+    const defaultConfig = {
+      bride_name: "Alya Nurpadillah",
+      groom_name: "Asep Permana",
+      bride_parents: "Bapak Saripudin & Almh.Ibu Yeni Ahdiyeni",
+      groom_parents: "Bapak Gunawan & Ibu Rohaeti",
+      event_date: "2026-02-08",
+      event_time: "10:00 WIB",
+      event_venue: "Rumah Mempelai Wanita",
+      event_address: "Kmp.Daraulin RT03 RW06 Desa Nanjung",
+      maps_url: "https://maps.app.goo.gl/wR3A5J3TypNrYU4C9",
+      music_url: "https://dl33.ymcdn.org/download?hash=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",
+      background_color: "#fdf4f5",
+      secondary_surface_color: "#ffffff",
+      text_color: "#d946a6",
+      primary_action_color: "#ec4899",
+      secondary_action_color: "#f472b6"
+    };
+    
+    let musicPlaying = false;
+    let countdownInterval;
+    
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString('id-ID', options);
+    }
+    
+    function updateCountdown(targetDate) {
+      const now = new Date().getTime();
+      const target = new Date(targetDate).getTime();
+      const distance = target - now;
+      
+      if (distance < 0) {
+        document.getElementById('days').textContent = '0';
+        document.getElementById('hours').textContent = '0';
+        document.getElementById('minutes').textContent = '0';
+        document.getElementById('seconds').textContent = '0';
+        return;
+      }
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+    
+    function startCountdown(dateString) {
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+      }
+      updateCountdown(dateString);
+      countdownInterval = setInterval(() => updateCountdown(dateString), 1000);
+    }
+    
+    function toggleMusic() {
+      const audio = document.getElementById('background-music');
+      const icon = document.getElementById('music-icon');
+      const text = document.getElementById('music-text');
+      
+      if (!musicPlaying) {
+        audio.play().then(() => {
+          musicPlaying = true;
+          icon.textContent = '🔇';
+          text.textContent = 'Hentikan Musik';
+        }).catch(() => {
+          // Music failed to play
+        });
+      } else {
+        audio.pause();
+        musicPlaying = false;
+        icon.textContent = '🔊';
+        text.textContent = 'Putar Musik';
+      }
+    }
+    
+    async function onConfigChange(config) {
+      const appWrapper = document.getElementById('app-wrapper');
+      const bgGradient = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, #e8d5d8 100%)`;
+      appWrapper.style.background = bgGradient;
+      
+      // Update names
+      document.getElementById('bride-name-display').textContent = config.bride_name || defaultConfig.bride_name;
+      document.getElementById('bride-name-display').style.color = config.text_color || defaultConfig.text_color;
+      document.getElementById('groom-name-display').textContent = config.groom_name || defaultConfig.groom_name;
+      document.getElementById('groom-name-display').style.color = config.text_color || defaultConfig.text_color;
+      
+      // Update parents
+      document.getElementById('bride-parents-display').textContent = config.bride_parents || defaultConfig.bride_parents;
+      document.getElementById('bride-parents-display').style.color = config.text_color || defaultConfig.text_color;
+      document.getElementById('groom-parents-display').textContent = config.groom_parents || defaultConfig.groom_parents;
+      document.getElementById('groom-parents-display').style.color = config.text_color || defaultConfig.text_color;
+      
+      // Update event details
+      const eventDate = config.event_date || defaultConfig.event_date;
+      document.getElementById('event-date-display').textContent = formatDate(eventDate);
+      document.getElementById('event-date-display').style.color = config.text_color || defaultConfig.text_color;
+      document.getElementById('event-time-display').textContent = config.event_time || defaultConfig.event_time;
+      document.getElementById('event-time-display').style.color = config.text_color || defaultConfig.text_color;
+      document.getElementById('event-venue-display').textContent = config.event_venue || defaultConfig.event_venue;
+      document.getElementById('event-venue-display').style.color = config.text_color || defaultConfig.text_color;
+      document.getElementById('event-address-display').textContent = config.event_address || defaultConfig.event_address;
+      
+      // Update maps URL
+      document.getElementById('maps-button').href = config.maps_url || defaultConfig.maps_url;
+      
+      // Update music URL
+      const audio = document.getElementById('background-music');
+      const musicUrl = config.music_url || defaultConfig.music_url;
+      if (musicUrl && musicUrl !== audio.src) {
+        audio.src = musicUrl;
+        if (musicPlaying) {
+          audio.play().catch(() => {});
+        }
+      }
+      
+      // Update countdown colors
+      const countdownElements = ['days', 'hours', 'minutes', 'seconds'];
+      countdownElements.forEach(id => {
+        document.getElementById(id).style.color = config.text_color || defaultConfig.text_color;
+      });
+      
+      // Update heading colors
+      const headings = document.querySelectorAll('h2');
+      headings.forEach(h => {
+        h.style.color = config.text_color || defaultConfig.text_color;
+      });
+      
+      // Update button backgrounds
+      const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const buttonGradient = `linear-gradient(135deg, ${primaryActionColor} 0%, ${config.text_color || defaultConfig.text_color} 100%)`;
+      document.getElementById('music-toggle').style.background = buttonGradient;
+      document.getElementById('maps-button').style.background = buttonGradient;
+      
+      // Update surfaces
+      const surfaces = document.querySelectorAll('[style*="background: white"]');
+      surfaces.forEach(surface => {
+        surface.style.background = config.secondary_surface_color || defaultConfig.secondary_surface_color;
+      });
+      
+      // Start countdown
+      startCountdown(eventDate);
+    }
+    
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.secondary_surface_color || defaultConfig.secondary_surface_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.secondary_surface_color = value;
+                window.elementSdk.setConfig({ secondary_surface_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+    
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["bride_name", config.bride_name || defaultConfig.bride_name],
+        ["groom_name", config.groom_name || defaultConfig.groom_name],
+        ["bride_parents", config.bride_parents || defaultConfig.bride_parents],
+        ["groom_parents", config.groom_parents || defaultConfig.groom_parents],
+        ["event_date", config.event_date || defaultConfig.event_date],
+        ["event_time", config.event_time || defaultConfig.event_time],
+        ["event_venue", config.event_venue || defaultConfig.event_venue],
+        ["event_address", config.event_address || defaultConfig.event_address],
+        ["maps_url", config.maps_url || defaultConfig.maps_url],
+        ["music_url", config.music_url || defaultConfig.music_url]
+      ]);
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('music-toggle').addEventListener('click', toggleMusic);
+      
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues
+        });
+      } else {
+        onConfigChange(defaultConfig);
+      }
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b80535d44330ddc',t:'MTc2NzQyMDU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
